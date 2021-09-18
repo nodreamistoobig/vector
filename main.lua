@@ -20,8 +20,8 @@ function love.load()
 	floating = Vector:create(0, -0.02)
 	isFloationg = false
 
-	rect1 = Rect:create(width*0.11, height*0.25, width*0.33, height/2)
-	rect2 = Rect:create(width*0.55, height*0.25, width*0.33, height/2)
+	rect1 = Rect:create(width*0.1, height*0.25, width*0.3, height/3)
+	rect2 = Rect:create(width*0.6, height*0.25, width*0.3, height/3)
 end
 
 function love.draw()
@@ -38,51 +38,22 @@ function love.draw()
 end
 
 function love.update()
-	--if isGravity then
-		--mover:applyForce(gravity)
-		--mover2:applyForce(gravity)
-	--end
-	--if isFloationg then
-	--	mover:applyForce(floating)
-	--	mover2:applyForce(floating)
-	--end
-	--if isWind then
-	--	mover:applyForce(wind)
-	--	mover2:applyForce(wind)
-	--end
-
 	mover:applyForce(gravity)
 	mover2:applyForce(gravity)
 
 	if (mover:belongsToRect(rect1)) then
 		friction = (mover.velocity * -1):norm()
 		if friction then
-			friction:mul(0.005)
-			mover:applyForce()
+			friction:mul(0.01)
+			mover:applyForce(friction)
 		end
 	end
-	
-	if (mover:belongsToRect(rect2)) then
-		friction = mover.velocity:norm()
-		if friction then
-			friction:mul(0.005)
-			mover:applyForce()
-		end
-	end
-		
 
-	if (mover2:belongsToRect(rect1)) then
-	friction = (mover2.velocity * -1):norm()
+	if (mover2:belongsToRect(rect2)) then
+		friction = (mover.velocity):norm()
 		if friction then
-			friction:mul(0.005)
-			mover2:applyForce()
-		end
-	end
-	if (mover2:belongsToRect(rect1)) then
-		friction = (mover2.velocity):norm()
-		if friction then
-			friction:mul(0.005)
-			mover2:applyForce()
+			friction:mul(0.01)
+			mover2:applyForce(friction)
 		end
 	end
 
