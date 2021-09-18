@@ -46,5 +46,5 @@ function Mover:checkBoundaries()
 end
 
 function Mover:belongsToRect(rect)
-	return (self.location.x > rect.x - self.size or self.location.x < rect.w - self.size)  and (self.location.y > rect.y - self.size or self.location.y < rect.h - self.size)
+	return (self.location.x > rect.x and self.location.x < rect.x + rect.w)  and (self.location.y > rect.y  and self.location.y < rect.y + rect.h)
 end
